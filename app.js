@@ -16,15 +16,23 @@
  * https://css-tricks.com/perfect-full-page-background-image/#awesome-easy-progressive-css3-way)
  */
 const author = document.getElementById('author')
-
+const currency = document.getElementById('currency')
 const url='https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
- async function handleImageGeneartion(){
+
+
+async function handleImageGeneartion(){
 const res = await fetch(url)
 const data = await res.json()
-console.log(data.user.first_name);
 document.body.style.background=`url(${data.urls.regular})`
 author.textContent=`${data.user.name}`
-
 }
+async function handleExchangeRates() {
+const res = await fetch(' https://api.coingecko.com/api/v3/exchange_rates')
+const data = await res.json()
+console.log(data);
+
+currency.textContent=`${data.rates.eth.value}`
+}
+handleExchangeRates()
 handleImageGeneartion()
 
