@@ -15,4 +15,16 @@
  * Instructions for this were found on CSS Tricks: 
  * https://css-tricks.com/perfect-full-page-background-image/#awesome-easy-progressive-css3-way)
  */
+const author = document.getElementById('author')
+
+const url='https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
+ async function handleImageGeneartion(){
+const res = await fetch(url)
+const data = await res.json()
+console.log(data.user.first_name);
+document.body.style.background=`url(${data.urls.regular})`
+author.textContent=`${data.user.name}`
+
+}
+handleImageGeneartion()
 
