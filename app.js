@@ -1,22 +1,7 @@
-/**
- * Challenge: get a random image from Unsplash and set it as the background
- * 
- * Part 1:
- * 
- * URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
- * (You can change the "query" at the end to whatever theme you want)
- * 
- * Change the body's backgroundImage to: 
- * `url(<insert the URL of the iamge from the API here>)`
- * 
- * (You may need to dig around the response body a bit to find this URL)
- * 
- * (Note I've already added some CSS to resize the image within the window.
- * Instructions for this were found on CSS Tricks: 
- * https://css-tricks.com/perfect-full-page-background-image/#awesome-easy-progressive-css3-way)
- */
+
 const author = document.getElementById('author')
 const currency = document.getElementById('currency')
+const crypto = document.getElementById('crypto')
 const url='https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
 
 
@@ -27,11 +12,29 @@ document.body.style.background=`url(${data.urls.regular})`
 author.textContent=`${data.user.name}`
 }
 async function handleExchangeRates() {
-const res = await fetch(' https://api.coingecko.com/api/v3/exchange_rates')
+const res = await fetch('https://api.coingecko.com/api/v3/coins/dogecoin')
 const data = await res.json()
 console.log(data);
-
-currency.textContent=`${data.rates.eth.value}`
+document.getElementById("crypto-top").innerHTML = `
+<img src=${data.image.small} />
+<span>${data.name}</span>
+`
+/**
+* Challenge: Add the following data points underneath the 
+* name and icon (1 paragraph each):
+* 
+* 1. Current price (data.market_data.current_price.usd)
+* 2. 24-hour high price (data.market_data.high_24h.usd)
+* 3. 24-hour low price (data.market_data.low_24h.usd)
+* 
+* Feel free to check the response data object for your own currency
+* if you don't want to use USD.
+*/
+document.getElementById("crypto").innerHTML += `
+<p>🎯: $${data.market_data.current_price.usd}</p>
+<p>👆: $${data.market_data.high_24h.usd}</p>
+<p>👇: $${data.market_data.low_24h.usd}</p>
+`
 }
 handleExchangeRates()
 handleImageGeneartion()
