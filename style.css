@@ -28,7 +28,7 @@ div.top {
 
 h1.time {
   text-align: center;
-  font-size: 2rem; /* Adjust for larger screens */
+  font-size: 5rem; /* Adjust for larger screens */
   margin-bottom: 20px;
   animation: fadeIn 1s ease-in-out;
 }
